@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Matiks Auto Solver Bot",
+  "version": "2.0",
+  "description": "Automatically solves math questions on matiks.in",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "host_permissions": ["https://www.matiks.in/*", "https://matiks.in/*"],
+  "icons": { "48": "icon.png", "128": "icon.png" },
+  "action": { "default_popup": "popup.html", "default_icon": "icon.png" },
+  "content_scripts": [{
+    "matches": ["https://www.matiks.in/*", "https://matiks.in/*"],
+    "js": ["content.js"],
+    "run_at": "document_start"
+  }],
+  "web_accessible_resources": [{
+    "resources": ["injected.js"],
+    "matches": ["https://www.matiks.in/*", "https://matiks.in/*"]
+  }]
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 260px;
+      background: linear-gradient(160deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      font-family: 'Segoe UI', monospace;
+      padding: 20px;
+    }
+    .header { text-align: center; margin-bottom: 20px; }
+    .robot { font-size: 42px; display: block; margin-bottom: 6px; }
+    h1 { font-size: 16px; color: #00ff88; letter-spacing: 1px; }
+    .subtitle { font-size: 10px; color: #aaa; margin-top: 2px; }
+    .status-box {
+      background: rgba(255,255,255,0.07);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(0,255,136,0.2);
+    }
+    .status-row { display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: #555; display: inline-block; margin-right: 6px; transition: background 0.3s; }
+    .dot.active { background: #00ff88; box-shadow: 0 0 6px #00ff88; }
+    .count { font-size: 28px; font-weight: bold; color: #00ff88; text-align: center; margin: 8px 0 2px; }
+    .count-label { font-size: 10px; color: #aaa; text-align: center; }
+    .last-q { font-size: 10px; color: #aaa; background: rgba(0,0,0,0.3); border-radius: 6px; padding: 6px 8px; margin-top: 8px; min-height: 28px; }
+    .btn { width: 100%; padding: 12px; border: none; border-radius: 10px; font-size: 14px; font-weight: bold; cursor: pointer; transition: all 0.2s; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .btn-start { background: linear-gradient(135deg, #00ff88, #00cc66); color: #0f2027; }
+    .btn-stop { background: linear-gradient(135deg, #ff4444, #cc0000); color: #fff; }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .btn:hover:not(:disabled) { opacity: 0.9; transform: scale(1.02); }
+    .toggle-row {
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(255,255,255,0.07); border-radius: 8px;
+      padding: 10px 12px; margin-bottom: 8px; font-size: 12px;
+    }
+    .toggle { position: relative; width: 40px; height: 22px; }
+    .toggle input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: #555; border-radius: 22px; transition: .3s; }
+    .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: .3s; }
+    input:checked + .slider { background: #00ff88; }
+    input:checked + .slider:before { transform: translateX(18px); }
+    .warning { font-size: 10px; color: #ffaa00; text-align: center; margin-top: 8px; padding: 6px; background: rgba(255,170,0,0.1); border-radius: 6px; }
+    .not-matiks { text-align: center; color: #ff6666; font-size: 12px; margin-top: 20px; padding: 10px; background: rgba(255,0,0,0.1); border-radius: 8px; }
+  </style>
+</head>
+<body>
+<div class="header">
+  <span class="robot">🤖</span>
+  <h1>MATIKS BOT</h1>
+  <div class="subtitle">Auto Math Solver</div>
+</div>
+
+<div id="main-ui">
+  <div class="status-box">
+    <div class="status-row">
+      <span><span class="dot" id="dot"></span><span id="status-text">Inactive</span></span>
+    </div>
+    <div class="count" id="count">0</div>
+    <div class="count-label">Questions Answered</div>
+    <div class="last-q" id="last-q">—</div>
+  </div>
+
+  <button class="btn btn-start" id="startBtn">▶ Start Bot</button>
+  <button class="btn btn-stop" id="stopBtn" disabled>⏹ Stop Bot</button>
+
+  <div class="toggle-row">
+    <span>🔄 Auto New Game</span>
+    <label class="toggle">
+      <input type="checkbox" id="autoRematch">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="warning">⚠️ For educational / project use only</div>
+</div>
+
+<div class="not-matiks" id="not-matiks" style="display:none">
+  Please open <b>matiks.in</b> first!
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>
